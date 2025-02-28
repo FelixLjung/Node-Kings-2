@@ -9,14 +9,19 @@ package com.almasb.fxglgames.drop;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
+import com.almasb.fxgl.dsl.FXGL;
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 import static com.almasb.fxgl.dsl.FXGL.getAppHeight;
 import static com.almasb.fxgl.dsl.FXGL.getAppWidth;
 import static com.almasb.fxgl.dsl.FXGL.getInput;
 import static com.almasb.fxgl.dsl.FXGL.onCollisionBegin;
 import static com.almasb.fxgl.dsl.FXGL.play;
+import static com.almasb.fxgl.dsl.FXGL.showMessage;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.ui.FXGLButton;
+
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 
 /**
  * This is an FXGL version of the libGDX simple game tutorial, which can be found
@@ -71,6 +76,29 @@ public class DropApp extends GameApplication {
 		basicGraphics();
 		FXGLButton button = new FXGLButton("Click here");
 		
+		
+		button.setOnAction(e -> showMessage("YOOO"));
+
+        Text uiText = new Text("Hello World");
+
+        // 2. add the UI object to game scene (easy way) at 100, 100
+        FXGL.addUINode(uiText, 100, 100);
+		Button btn = new Button("Knappen pär");
+
+		btn.setTranslateX(350);
+        btn.setTranslateY(250);
+
+        // Add action event
+        btn.setOnAction(e -> showMessage("Button Clicked!"));
+
+        // Add to UI
+        // FXGL.addUINode(btn);
+
+		button.setTranslateX(500);
+		button.setTranslateY(500);
+
+		FXGL.addUINode(button);
+
 		// FXGL.entityBuilder()
         // loopBGM("bgm.mp3");
     }
