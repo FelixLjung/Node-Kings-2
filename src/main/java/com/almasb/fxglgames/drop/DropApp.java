@@ -5,7 +5,6 @@
  */
 
 package com.almasb.fxglgames.drop;
-
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
@@ -19,6 +18,7 @@ import static com.almasb.fxgl.dsl.FXGL.play;
 import static com.almasb.fxgl.dsl.FXGL.showMessage;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.ui.FXGLButton;
+import com.almasb.fxglgames.drop.classes.BoardSquare;
 
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -99,7 +99,7 @@ public class DropApp extends GameApplication {
 
 		FXGL.addUINode(button);
 
-        BoardSquare square = new BoardSquare();
+        BoardSquare square = new BoardSquare("Castle", 40,40);
 
 		// FXGL.entityBuilder()
         // loopBGM("bgm.mp3");
