@@ -17,9 +17,9 @@ public class Button extends GameApplication {
 
 	// HIGH KEY detta borde vara en subclass till Button, specifikt för castles
 
-	public Button(Castle castle) {
+	public Button(Castle castle, Graphics graphics) {
 		this.castle = castle;
-		graphics = new Graphics();
+		this.graphics = graphics;
 	}
 
 
@@ -29,6 +29,7 @@ public class Button extends GameApplication {
 		graphics.DrawCastleInfo(castle.getName(), castle.getOwner());
 		return true;
 	}
+	
 	public void AddButton(int posX, int posY, int width, int height) {
 		FXGLButton newButton = new FXGLButton();
 		newButton.setTranslateX(posX);

@@ -20,15 +20,16 @@ public class Castle extends GameApplication{
 	protected void initSettings(GameSettings settings) {
 	}
 	
-	public Castle(int posX, int posY, String name, String owner) {
-		graphics = new Graphics();
+	public Castle(int posX, int posY, String name, String owner, Graphics graphics) {
+		
 		this.posX = posX; 
 		this.posY = posY;
 		this.name = name; 
 		this.owner = owner;
+		this.graphics = graphics;
 
 		graphics.Draw_castles(posX,posY,width,height);
-		Button button = new Button(this);
+		Button button = new Button(this, graphics);
 		button.AddButton(posX,posY,	width, height);
 	}
 

@@ -5,6 +5,8 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
+import static com.almasb.fxgl.dsl.FXGL.removeUINode;
+
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 
@@ -24,6 +26,7 @@ public class Graphics extends GameApplication {
 	private int bottomWidth = 1100;
 
 	Entity castleInfo = null;
+	Text castleInfoText = null;
 
 	@Override
 	protected void initSettings(GameSettings settings) {
@@ -51,12 +54,12 @@ public class Graphics extends GameApplication {
 		.buildAndAttach();
 	}
 
-	private static void print(String text, int posX, int posY) {
+	private static Text print(String text, int posX, int posY) {
 		
         Text uiText = new Text(text);
 
-        // 2. add the UI object to game scene (easy way) at 100, 100
         FXGL.addUINode(uiText, posX, posY);
+		return uiText;
 	}
 
 	public void Draw_castles(int posX, int posY, int width, int height ) {
@@ -69,11 +72,12 @@ public class Graphics extends GameApplication {
 		if (castleInfo != null) {
 			GameWorld world = getGameWorld();
 			world.removeEntity(castleInfo);
+			removeUINode(castleInfoText);
 			System.out.println("Försöker radera!");
 		}
 
 		castleInfo = draw(bottomX, bottomY, bottomHeight, bottomWidth, Color.BLANCHEDALMOND);
-		print(name, bottomX + 50, bottomY + 50);
-	
+		castleInfoText = print(name, bottomX + 50, bottomY + 50);
+		
 	}
 }

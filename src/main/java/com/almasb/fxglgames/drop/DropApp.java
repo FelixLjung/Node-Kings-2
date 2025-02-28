@@ -51,6 +51,8 @@ public class DropApp extends GameApplication {
         DROPLET, BUCKET
     }
 
+    private Graphics graphics;
+
     @Override
     protected void initSettings(GameSettings settings) {
         // initialize common game / window settings.
@@ -61,7 +63,7 @@ public class DropApp extends GameApplication {
     }
 
 	private void basicGraphics() {
-		Graphics graphics = new Graphics();
+		graphics = new Graphics();
 
 		graphics.DrawGame();
 		// graphics.Draw_castles(800,400,50,70);
@@ -81,8 +83,8 @@ public class DropApp extends GameApplication {
 		Player player1 = new Player("Felix");
 		Player player2 = new Player("Alfred");
 		this.player = player1;
-		Castle castle1 = new Castle(800,400, "Castle 1", player1.GetName());
-		Castle castle2 = new Castle(1200,500, "Castle 2", player2.GetName());
+		Castle castle1 = new Castle(800,400, "Castle 1", player1.GetName(), graphics);
+		Castle castle2 = new Castle(1200,500, "Castle 2", player2.GetName(), graphics);
 
 
 
