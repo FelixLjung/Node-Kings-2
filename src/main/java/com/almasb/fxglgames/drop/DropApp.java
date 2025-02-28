@@ -19,6 +19,7 @@ import static com.almasb.fxgl.dsl.FXGL.showMessage;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.ui.FXGLButton;
 import com.almasb.fxglgames.drop.classes.BoardSquare;
+import com.almasb.fxglgames.drop.classes.Castle;
 
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -61,6 +62,7 @@ public class DropApp extends GameApplication {
 		Graphics graphics = new Graphics();
 
 		graphics.DrawGame();
+		// graphics.Draw_castles(800,400,50,70);
 		
 
 
@@ -74,6 +76,11 @@ public class DropApp extends GameApplication {
         // run(() -> spawnDroplet(), Duration.seconds(1));
 
 		basicGraphics();
+		
+		Castle castle1 = new Castle(800,400, "Castle 1", "Felix");
+		Castle castle2 = new Castle(1200,600, "Castle 2", "Alfred");
+
+
 		FXGLButton button = new FXGLButton("Click here");
 		
 		
