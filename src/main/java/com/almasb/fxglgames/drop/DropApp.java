@@ -99,6 +99,8 @@ public class DropApp extends GameApplication {
 
 		FXGL.addUINode(button);
 
+        BoardSquare square = new BoardSquare();
+
 		// FXGL.entityBuilder()
         // loopBGM("bgm.mp3");
     }
