@@ -42,6 +42,8 @@ import javafx.scene.text.Text;
  */
 public class DropApp extends GameApplication {
 
+
+	public Player player;
     /**
      * Types of entities in this game.
      */
@@ -76,9 +78,12 @@ public class DropApp extends GameApplication {
         // run(() -> spawnDroplet(), Duration.seconds(1));
 
 		basicGraphics();
-		
-		Castle castle1 = new Castle(800,400, "Castle 1", "Felix");
-		Castle castle2 = new Castle(1200,600, "Castle 2", "Alfred");
+		Player player1 = new Player("Felix");
+		Player player2 = new Player("Alfred");
+		this.player = player1;
+		Castle castle1 = new Castle(800,400, "Castle 1", player1.GetName());
+		Castle castle2 = new Castle(1200,500, "Castle 2", player2.GetName());
+
 
 
 		FXGLButton button = new FXGLButton("Click here");
