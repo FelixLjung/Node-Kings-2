@@ -30,7 +30,7 @@ public class Button extends GameApplication {
 		Entity player = FXGL.getGameWorld().getEntitiesByType(Type.PLAYER).get(0); // kör get för det är en lista, hoppas att första är rätt!
 		String name = player.getComponent(Player.class).GetName(); // hämtar ut klassen från Enityy och kör metoden GetName
 		System.out.println(name + " Klickade på Castle " + castle);
-		graphics.DrawCastleInfo(castle.getName(), castle.getOwner());
+		graphics.DrawCastleInfo(name, castle.getName(), castle.getOwner(), castle);
 		return true;
 	}
 

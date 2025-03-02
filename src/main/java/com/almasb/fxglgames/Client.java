@@ -17,7 +17,7 @@ public class Client {
             System.out.println("Connected!");
             
             in = new DataInputStream(System.in);
-
+            
             // Sends output to the socket
             out = new DataOutputStream(s.getOutputStream());
 
@@ -32,6 +32,14 @@ public class Client {
             return;
         }
 
+    }
+
+    public void GetId() {
+        // try {
+        //     // System.out.println(in.readInt());
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     public void NextTurn() {

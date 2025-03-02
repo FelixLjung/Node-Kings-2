@@ -33,6 +33,15 @@ public class Castle extends GameApplication{
 		button.AddButton(posX,posY,	width, height);
 	}
 
+
+	public void train(){
+		System.out.println("training warriors");
+	}
+
+	public void attack(String attacker) {
+		System.out.println(name + " is being attacked by " + attacker + "!");
+	}
+
 	@Override
 	public String toString() {
 		return name + " of " + owner;

@@ -82,6 +82,8 @@ public class DropApp extends GameApplication {
 
     private void JoinServer() {
         c = new Client("127.0.0.1", 5000);
+        c.GetId();
+
     }
 
     private void ServerButtons() {
@@ -109,6 +111,8 @@ public class DropApp extends GameApplication {
         // run(() -> spawnDroplet(), Duration.seconds(1));
 
 		basicGraphics();
+        ServerButtons();
+
 		Player player1 = new Player("Felix");
 		Player player2 = new Player("Alfred");
 		this.player = player1;
@@ -152,7 +156,6 @@ public class DropApp extends GameApplication {
 
         
 
-        ServerButtons();
 
         FXGLButton buttonNextTurn = new FXGLButton("Next Turn");
         buttonNextTurn.setTranslateX(1000);

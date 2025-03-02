@@ -7,10 +7,16 @@ import com.almasb.fxgl.dsl.FXGL;
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
 import static com.almasb.fxgl.dsl.FXGL.removeUINode;
 
+import java.util.LinkedList;
+
+
 import com.almasb.ButtonComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
+import com.almasb.fxgl.ui.FXGLButton;
+import com.almasb.fxglgames.drop.classes.Castle;
 
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -28,6 +34,7 @@ public class Graphics extends GameApplication {
 
 	Entity castleInfo = null;
 	Text castleInfoText = null;
+	LinkedList<Node> castleInfoObjects;
 
 	@Override
 	protected void initSettings(GameSettings settings) {
@@ -69,19 +76,58 @@ public class Graphics extends GameApplication {
 
 	}
 
-	public void DrawCastleInfo(String name, String owner) {
-		if (castleInfo != null) {
+	private void clearCastleInfo() {
+		while (castleInfoObjects.size() > 0) {
+			removeUINode(castleInfoObjects.remove());
+			
+		}
+		
+	}
+
+	public void DrawCastleInfo(String player, String name, String owner, Castle castle) {
+		if (castleInfoObjects == null) {
+			castleInfoObjects = new LinkedList<>();
+		}
+		else {
 			GameWorld world = getGameWorld();
 			world.removeEntity(castleInfo);
-			removeUINode(castleInfoText);
-			System.out.println("Försöker radera!");
+			
+			System.out.println("{DrawCastleInfo} clearing previous");
+			
+			clearCastleInfo();
+			System.out.println("{DrawCastleInfo} clearing done");
 		}
 
 		castleInfo = draw(bottomX, bottomY, bottomHeight, bottomWidth, Color.BLANCHEDALMOND);
-		castleInfoText = print(name, bottomX + 50, bottomY + 50);
-		castleInfo.addComponent(new ButtonComponent());
-		castleInfo.getComponent(ButtonComponent.class).
-			AddButton(bottomX+ 250, bottomY+ 50, 50, 30);
+		castleInfoText = print(name + " of " + owner, bottomX + 50, bottomY + 50);
+		castleInfoObjects.add(castleInfoText);
+		// Försökte lägga till en button som komponent, gick sådär
+		// ButtonComponent buttonComponent = new ButtonComponent();
+		// buttonComponent.AddButton(bottomY, bottomX, bottomWidth, bottomHeight);
+		// castleInfo.addComponent(buttonComponent);
+		// castleInfo.getComponent(ButtonComponent.class).
+		// 	AddButton(bottomX+ 250, bottomY+ 50, 50, 30);
+		
+		if (player.equals(owner)) {
+			FXGLButton trainButton = new FXGLButton("Train");
+			trainButton.setTranslateX(bottomX + 50);
+			trainButton.setTranslateY(bottomY + 50);
+			trainButton.setOnAction(e -> castle.train());
+
+			FXGL.addUINode(trainButton);
+			castleInfoObjects.add(trainButton);
+		} else {
+			FXGLButton attackButton = new FXGLButton("Attack");
+			attackButton.setTranslateX(bottomX + 50);
+			attackButton.setTranslateY(bottomY + 50);
+			attackButton.setOnAction(e -> castle.attack(player));
+			FXGL.addUINode(attackButton);
+			castleInfoObjects.add(attackButton);
+		}
+
+
+
+		
 		
 	}
 }
