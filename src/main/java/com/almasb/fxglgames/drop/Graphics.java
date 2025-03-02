@@ -7,6 +7,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
 import static com.almasb.fxgl.dsl.FXGL.removeUINode;
 
+import com.almasb.ButtonComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 
@@ -78,6 +79,9 @@ public class Graphics extends GameApplication {
 
 		castleInfo = draw(bottomX, bottomY, bottomHeight, bottomWidth, Color.BLANCHEDALMOND);
 		castleInfoText = print(name, bottomX + 50, bottomY + 50);
+		castleInfo.addComponent(new ButtonComponent());
+		castleInfo.getComponent(ButtonComponent.class).
+			AddButton(bottomX+ 250, bottomY+ 50, 50, 30);
 		
 	}
 }

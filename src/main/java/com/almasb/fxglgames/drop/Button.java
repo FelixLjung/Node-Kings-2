@@ -3,7 +3,9 @@ package com.almasb.fxglgames.drop;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.ui.FXGLButton;
+import com.almasb.fxglgames.drop.DropApp.Type;
 import com.almasb.fxglgames.drop.classes.Castle;
 
 
@@ -25,11 +27,13 @@ public class Button extends GameApplication {
 
 
 	private boolean ClickCastle() {
-		System.out.println("Klickade på Castle " + castle);
+		Entity player = FXGL.getGameWorld().getEntitiesByType(Type.PLAYER).get(0); // kör get för det är en lista, hoppas att första är rätt!
+		String name = player.getComponent(Player.class).GetName(); // hämtar ut klassen från Enityy och kör metoden GetName
+		System.out.println(name + " Klickade på Castle " + castle);
 		graphics.DrawCastleInfo(castle.getName(), castle.getOwner());
 		return true;
 	}
-	
+
 	public void AddButton(int posX, int posY, int width, int height) {
 		FXGLButton newButton = new FXGLButton();
 		newButton.setTranslateX(posX);

@@ -18,6 +18,8 @@ import static com.almasb.fxgl.dsl.FXGL.play;
 import static com.almasb.fxgl.dsl.FXGL.showMessage;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.ui.FXGLButton;
+import com.almasb.fxglgames.Client;
+import com.almasb.fxglgames.Server;
 import com.almasb.fxglgames.drop.classes.BoardSquare;
 import com.almasb.fxglgames.drop.classes.Castle;
 
@@ -44,11 +46,13 @@ public class DropApp extends GameApplication {
 
 
 	public Player player;
+    public Server s;
+    public Client c;
     /**
      * Types of entities in this game.
      */
     public enum Type {
-        DROPLET, BUCKET
+        DROPLET, BUCKET, PLAYER
     }
 
     private Graphics graphics;
@@ -72,6 +76,31 @@ public class DropApp extends GameApplication {
 
 	}
 
+    private void StartServer() {
+       s = new Server(5000,2);
+    }
+
+    private void JoinServer() {
+        c = new Client("127.0.0.1", 5000);
+    }
+
+    private void ServerButtons() {
+        FXGLButton buttonServer = new FXGLButton("Start Server");
+        buttonServer.setTranslateX(250);
+        buttonServer.setTranslateY(250);
+        buttonServer.setOnAction(e -> StartServer());
+
+        FXGL.addUINode(buttonServer);
+
+        FXGLButton buttonJoin = new FXGLButton("Join Server");
+        
+        buttonJoin.setTranslateX(350);
+        buttonJoin.setTranslateY(250);
+
+        buttonJoin.setOnAction(e->JoinServer());
+        FXGL.addUINode(buttonJoin);
+    }
+
     @Override
     protected void initGame() {
         // spawnBucket();
@@ -83,6 +112,11 @@ public class DropApp extends GameApplication {
 		Player player1 = new Player("Felix");
 		Player player2 = new Player("Alfred");
 		this.player = player1;
+        
+        Entity clientPlayer = FXGL.entityBuilder().type(Type.PLAYER).buildAndAttach();
+        
+        clientPlayer.addComponent(new Player(player1.GetName()));
+        
 		Castle castle1 = new Castle(800,400, "Castle 1", player1.GetName(), graphics);
 		Castle castle2 = new Castle(1200,500, "Castle 2", player2.GetName(), graphics);
 
@@ -114,7 +148,17 @@ public class DropApp extends GameApplication {
 		FXGL.addUINode(button);
 
         BoardSquare square = new BoardSquare("Castle", 40,40);
+        
 
+        
+
+        ServerButtons();
+
+        FXGLButton buttonNextTurn = new FXGLButton("Next Turn");
+        buttonNextTurn.setTranslateX(1000);
+        buttonNextTurn.setTranslateY(500);
+        buttonNextTurn.setOnAction(e->c.NextTurn());
+        FXGL.addUINode(buttonNextTurn);
 		// FXGL.entityBuilder()
         // loopBGM("bgm.mp3");
     }
